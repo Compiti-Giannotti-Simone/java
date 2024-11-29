@@ -48,4 +48,10 @@ public class Museum {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Museum [collection=" + collection + "]";
+    }
+
 }

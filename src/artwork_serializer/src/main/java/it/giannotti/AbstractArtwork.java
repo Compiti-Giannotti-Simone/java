@@ -2,7 +2,21 @@ package it.giannotti;
 
 import java.sql.Date;
 
-public abstract class AbstractArtwork implements Artwork {
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Sculpture.class, name = "sculpture"),
+        @JsonSubTypes.Type(value = Painting.class, name = "painting")
+})
+
+
+public abstract class AbstractArtwork {
     private String title, artist;
     private Date date;
 
@@ -27,6 +41,8 @@ public abstract class AbstractArtwork implements Artwork {
     public Date getDate() {
         return date;
     }
+
+    public abstract String getType();
 
     @Override
     public String toString() {
