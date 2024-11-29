@@ -1,7 +1,5 @@
 package it.giannotti;
 
-import java.sql.Date;
-
 public class Sculpture extends AbstractArtwork {
     private String material;
 
@@ -9,8 +7,8 @@ public class Sculpture extends AbstractArtwork {
 
     }
 
-    public Sculpture(String title, String artist, Date date, String material) {
-        super(title, artist, date);
+    public Sculpture(String title, String artist, int year, String material) {
+        super(title, artist, year);
         this.material = material;
     }
 

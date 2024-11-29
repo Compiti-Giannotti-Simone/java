@@ -1,33 +1,27 @@
 package it.giannotti;
 
-import java.sql.Date;
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
-)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Sculpture.class, name = "sculpture"),
-        @JsonSubTypes.Type(value = Painting.class, name = "painting")
+        @JsonSubTypes.Type(value = Painting.class, name = "painting"),
+        @JsonSubTypes.Type(value = Installation.class, name = "installation")
 })
-
 
 public abstract class AbstractArtwork {
     private String title, artist;
-    private Date date;
+    private int year;
 
     public AbstractArtwork() {
 
     }
 
-    public AbstractArtwork(String title, String artist, Date date) {
+    public AbstractArtwork(String title, String artist, int year) {
         this.title = title;
         this.artist = artist;
-        this.date = date;
+        this.year = year;
     }
 
     public String getTitle() {
@@ -38,15 +32,15 @@ public abstract class AbstractArtwork {
         return artist;
     }
 
-    public Date getDate() {
-        return date;
+    public int getYear() {
+        return year;
     }
 
     public abstract String getType();
 
     @Override
     public String toString() {
-        return "title=" + title + ", artist=" + artist + ", date=" + date;
+        return "title=" + title + ", artist=" + artist + ", year=" + year;
     }
 
 }

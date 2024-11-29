@@ -1,7 +1,5 @@
 package it.giannotti;
 
-import java.sql.Date;
-
 public class Painting extends AbstractArtwork {
     private String style;
 
@@ -9,8 +7,8 @@ public class Painting extends AbstractArtwork {
         
     }
 
-    public Painting(String title, String artist, Date date, String style) {
-        super(title,artist,date);
+    public Painting(String title, String artist, int year, String style) {
+        super(title,artist,year);
         this.style = style;
     }
 

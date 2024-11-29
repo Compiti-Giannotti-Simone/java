@@ -28,6 +28,16 @@ public class Museum {
         collection.get(artist).removeIf(a -> a.getTitle().equals(title));
     }
 
+    public AbstractArtwork get(String title) {
+        return collection.values().stream().flatMap(Set::stream).filter(a -> a.getTitle().equals(title)).findFirst()
+                .orElse(null);
+    }
+
+    public AbstractArtwork get(int year) {
+        return collection.values().stream().flatMap(Set::stream).filter(a -> a.getYear() == year).findFirst()
+                .orElse(null);
+    }
+
     public void saveToFile() {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("museum.json");
@@ -51,7 +61,7 @@ public class Museum {
 
     @Override
     public String toString() {
-        return "Museum [collection=" + collection + "]";
+        return "Museum [" + collection + "]";
     }
 
 }
