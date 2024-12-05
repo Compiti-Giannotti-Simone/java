@@ -44,7 +44,7 @@ public class ResizableStack<T> {
     @SuppressWarnings("unchecked")
     public T pop() {
         if (isEmpty()) throw new IllegalStateException("Stack is empty");
-        return (T) stack[used--];
+        return (T) stack[--used];
     }
 
     /**
@@ -54,7 +54,7 @@ public class ResizableStack<T> {
     @SuppressWarnings("unchecked")
     public T peek() {
         if (isEmpty()) throw new IllegalStateException("Stack is empty");
-        return (T) stack[used];
+        return (T) stack[used-1];
     }
 
     /**
@@ -74,7 +74,7 @@ public class ResizableStack<T> {
     @Override
     public String toString() {
         String s = "ResizableStack [";
-        for(int i = used;i > 0;i--) {
+        for(int i = used-1;i >= 0;i--) {
             s += stack[i].toString();
             s += ", ";
         }

@@ -23,6 +23,7 @@ public class ResizableQueue<T> {
         for (int i = pos; i < back - 1; i++) {
             queue[i] = queue[i + 1];
         }
+        queue[--back] = null; 
     }
 
     /**

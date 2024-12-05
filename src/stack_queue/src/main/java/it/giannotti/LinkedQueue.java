@@ -24,7 +24,7 @@ public class LinkedQueue<T> {
      * @return true if empty, otherwise false
      */
     public boolean isEmpty() {
-        return front == null;
+        return front.equals(null);
     }
 
     /**
@@ -91,10 +91,11 @@ public class LinkedQueue<T> {
     @Override
     public String toString() {
         String s = "LinkedQueue [";
-        while(front != null) {
-            s += front.element.toString();
+        Node temp = front;
+        while(temp != null) {
+            s += temp.element.toString();
             s += ", ";
-            front = front.link;
+            temp = temp.link;
         }
         s += "]";
         return s.replace(", ]", "]");

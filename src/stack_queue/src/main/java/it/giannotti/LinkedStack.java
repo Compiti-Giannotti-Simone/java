@@ -25,7 +25,7 @@ public class LinkedStack<T> {
      * @return true if empty, otherwise false
      */
     public boolean isEmpty() {
-        return top == null;
+        return top.equals(null);
     }
 
     /**
@@ -79,10 +79,11 @@ public class LinkedStack<T> {
     @Override
     public String toString() {
         String s = "LinkedStack [";
-        while(top != null) {
-            s += top.element.toString();
+        Node temp = top;
+        while(temp != null) {
+            s += temp.element.toString();
             s += ", ";
-            top = top.link;
+            temp = temp.link;
         }
         s += "]";
         return s.replace(", ]", "]");
