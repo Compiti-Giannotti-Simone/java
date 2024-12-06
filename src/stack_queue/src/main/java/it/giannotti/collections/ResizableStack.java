@@ -1,4 +1,4 @@
-package it.giannotti;
+package it.giannotti.collections;
 
 /**
  * A stack type list implemented using static arrays

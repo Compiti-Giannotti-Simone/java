@@ -1,29 +1,22 @@
-package it.giannotti;
+package it.giannotti.collections;
 
 /**
- * A queue type list implemented using static arrays
+ * A queue type list implemented using nodes with pointers
  */
-public class ResizableQueue<T> {
+public class LinkedQueue<T> {
 
-    private Object[] queue = new Object[10];
-    private int back = 0;
+    private class Node {
+        private T element;
+        private Node link;
 
-    public ResizableQueue() {
+        Node(T element) {
+            this.element = element;
+        }
     }
 
-    private void resizeQueue() {
-        Object[] newQueue = new Object[10 + queue.length];
-        for(int i = 0; i < queue.length;i++) {
-            newQueue[i] = queue[i];
-        }
-        queue = newQueue;
-    }
+    private Node front, back;
 
-    private void shiftL(int pos) {
-        for (int i = pos; i < back - 1; i++) {
-            queue[i] = queue[i + 1];
-        }
-        queue[--back] = null; 
+    public LinkedQueue() {
     }
 
     /**
@@ -31,7 +24,7 @@ public class ResizableQueue<T> {
      * @return true if empty, otherwise false
      */
     public boolean isEmpty() {
-        return back == 0;
+        return front.equals(null);
     }
 
     /**
@@ -39,20 +32,30 @@ public class ResizableQueue<T> {
      * @param element element to add
      */
     public void enqueue(T element) {
-        if(back == queue.length) resizeQueue();
-        queue[back] = element;
-        back++;
+        Node n = new Node(element);
+        if(back == null) {
+            back = n;
+            front = back;
+        }
+        else {
+            back.link = n;
+            back = n;
+        }
     }
 
     /**
      * Removes and returns the element at the front of the queue
      * @returns element at the front of the quee
      */
-    @SuppressWarnings("unchecked")
     public T dequeue() {
-        if (isEmpty()) throw new IllegalStateException("Queue is empty");
-        T element = (T) queue[0];
-        shiftL(0);
+        if(isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        T element = front.element;
+        front = front.link;
+        if(front == null) {
+            front = back;
+        }
         return element;
     }
 
@@ -60,10 +63,11 @@ public class ResizableQueue<T> {
      * Returns the element at the front of the queue, without removing it
      * @returns element at the front of the quee
      */
-    @SuppressWarnings("unchecked")
     public T peek() {
-        if (isEmpty()) throw new IllegalStateException("Queue is empty");
-        return (T) queue[0];
+        if(isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return front.element;
     }
 
     /**
@@ -74,18 +78,24 @@ public class ResizableQueue<T> {
      * @return position of the element, or -1 if it's not present
      */
     public int search(T element) {
-        for(int i = 0;i < back;i++) {
-            if(queue[i].equals(element)) return i+1;
+        Node n = front;
+        int pos = 1;
+        while(n != null) {
+            if(n.element.equals(element)) return pos;
+            n = n.link;
+            pos++;
         }
         return -1;
     }
 
     @Override
     public String toString() {
-        String s = "ResizableQueue [";
-        for(int i = 0;i < back;i++) {
-            s += queue[i].toString();
+        String s = "LinkedQueue [";
+        Node temp = front;
+        while(temp != null) {
+            s += temp.element.toString();
             s += ", ";
+            temp = temp.link;
         }
         s += "]";
         return s.replace(", ]", "]");
