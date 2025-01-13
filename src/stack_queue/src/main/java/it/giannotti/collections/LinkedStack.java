@@ -1,4 +1,4 @@
-package it.giannotti;
+package it.giannotti.collections;
 
 
 /**
