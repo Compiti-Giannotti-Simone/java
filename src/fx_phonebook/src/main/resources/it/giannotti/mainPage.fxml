@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.giannotti.Controller.MainController">
+   <children>
+      <VBox alignment="CENTER" minHeight="500.0" minWidth="600.0" spacing="20.0">
+         <children>
+            <ScrollPane fx:id="container" minHeight="400.0" minWidth="560.0">
+               <content>
+                  <VBox fx:id="contact_box" prefHeight="200.0" prefWidth="560.0">
+                     <children>
+                        <HBox minHeight="50.0" minWidth="560.0">
+                           <children>
+                              <Label alignment="CENTER" minHeight="50.0" minWidth="140.0" text="Label" />
+                              <Label alignment="CENTER" minHeight="50.0" minWidth="140.0" text="Label" />
+                              <Label alignment="CENTER" minHeight="50.0" minWidth="140.0" text="Label" />
+                              <Button alignment="CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" text="Delete">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button minHeight="30.0" minWidth="50.0" mnemonicParsing="false" text="Edit">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Button onAction="#showNewContactPane" text="Add contact" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <Pane fx:id="add_contact_pane" minHeight="480.0" minWidth="580.0" style="-fx-background-color: #ffffff; -fx-border-color: #999999;" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <TextField fx:id="add_name_field" layoutX="90.0" layoutY="94.0" minWidth="400.0" promptText="Inserisci nome" />
+            <TextField fx:id="add_surname_field" layoutX="90.0" layoutY="215.0" minWidth="400.0" promptText="Inserisci cognome" />
+            <TextField fx:id="add_number_field" layoutX="90.0" layoutY="338.0" minWidth="400.0" promptText="Inserisci numero" />
+            <Label layoutX="90.0" layoutY="77.0" text="Nome" />
+            <Label layoutX="90.0" layoutY="198.0" text="Cognome" />
+            <Label layoutX="90.0" layoutY="321.0" text="Numero" />
+            <Button layoutX="258.0" layoutY="416.0" mnemonicParsing="false" onAction="#addContact" text="Aggiungi" />
+         </children>
+      </Pane>
+      <Pane fx:id="edit_contact_pane" layoutX="10.0" layoutY="10.0" minHeight="480.0" minWidth="580.0" style="-fx-background-color: #ffffff; -fx-border-color: #999999;" visible="false">
+         <children>
+            <TextField fx:id="edit_name_field" layoutX="90.0" layoutY="94.0" minWidth="400.0" promptText="Inserisci nome" />
+            <TextField fx:id="edit_surname_field" layoutX="90.0" layoutY="215.0" minWidth="400.0" promptText="Inserisci cognome" />
+            <TextField fx:id="edit_number_field" layoutX="90.0" layoutY="338.0" minWidth="400.0" promptText="Inserisci numero" />
+            <Label layoutX="90.0" layoutY="77.0" text="Nome" />
+            <Label layoutX="90.0" layoutY="198.0" text="Cognome" />
+            <Label layoutX="90.0" layoutY="321.0" text="Numero" />
+            <Button layoutX="203.0" layoutY="416.0" mnemonicParsing="false" onAction="#cancelEdit" text="Annulla" />
+            <Button layoutX="320.0" layoutY="416.0" mnemonicParsing="false" onAction="#editContact" text="Modifica" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

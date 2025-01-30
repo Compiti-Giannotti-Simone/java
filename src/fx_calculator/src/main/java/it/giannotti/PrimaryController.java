@@ -42,9 +42,9 @@ public class PrimaryController {
         } catch(Exception e) {
             operation = "Syntax Error";
             updateScreen();
-            operation = "";
         }
         updateScreen();
+        operation = "";
     }
     @FXML
     private void updateOperation() throws IOException {
