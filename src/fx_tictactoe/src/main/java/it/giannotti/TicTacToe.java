@@ -42,29 +42,29 @@ public class TicTacToe {
         player = (player % 2) + 1;
     }
 
-    public int checkWin() {
+    public Winner checkWin() {
         // check row/column wins
         for (int i = 0; i < board.length; i++) {
             if (board[i][0] != 0 && board[i][0] == board[i][1] && board[i][1] == board[i][2])
-                return board[i][0];
+                return new Winner(board[i][0], i);
             if (board[0][i] != 0 && board[0][i] == board[1][i] && board[1][i] == board[2][i])
-                return board[0][i];
+                return new Winner(board[0][i], i + 3);
         }
         // check diagonal wins
         if (board[0][0] != 0 && board[0][0] == board[1][1] && board[1][1] == board[2][2])
-            return board[0][0];
+            return new Winner(board[0][0], 6);
         if (board[0][2] != 0 && board[0][2] == board[1][1] && board[1][1] == board[2][0])
-            return board[0][2];
+            return new Winner(board[0][2], 7);
         // check if board is full (tie)
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                // 0 = no win, game ongoing
+                // null = no win, game ongoing
                 if (board[i][j] == 0)
-                    return 0;
+                    return null;
             }
         }
         // no empty spaces or wins found, tied game
         // -1 = tie
-        return -1;
+        return new Winner(-1, -1);
     }
 }

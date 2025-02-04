@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.giannotti.PrimaryController">
+<AnchorPane fx:id="main_pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.giannotti.PrimaryController">
    <children>
       <VBox minHeight="380.0" minWidth="340.0" style="-fx-alignment: CENTER;">
          <children>
@@ -104,5 +104,13 @@
             </Label>
          </children>
       </Pane>
+      <Line fx:id="win0" endX="310.0" endY="70.0" startX="30.0" startY="70.0" strokeWidth="5.0" visible="false" />
+      <Line fx:id="win1" endX="310.0" endY="170.0" startX="30.0" startY="170.0" strokeWidth="5.0" visible="false" />
+      <Line fx:id="win2" endX="310.0" endY="270.0" startX="30.0" startY="270.0" strokeWidth="5.0" visible="false" />
+      <Line fx:id="win3" endX="70.0" endY="310.0" startX="70.0" startY="30.0" strokeWidth="5.0" visible="false" />
+      <Line fx:id="win4" endX="170.0" endY="310.0" startX="170.0" startY="30.0" strokeWidth="5.0" visible="false" />
+      <Line fx:id="win5" endX="270.0" endY="310.0" startX="270.0" startY="30.0" strokeWidth="5.0" visible="false" />
+      <Line fx:id="win6" endX="310.0" endY="310.0" startX="30.0" startY="30.0" strokeWidth="5.0" visible="false" />
+      <Line fx:id="win7" endX="30.0" endY="310.0" startX="310.0" startY="30.0" strokeWidth="5.0" visible="false" />
    </children>
 </AnchorPane>
