@@ -34,7 +34,7 @@ public class PrimaryController {
     private Button startButton;
 
     @FXML
-    private Label playerResult, enemyResult, gameResult;
+    private Label playerResult, enemyResult, gameResult, setupError, attackError;
 
     private Label nextShip;
 
@@ -71,6 +71,7 @@ public class PrimaryController {
 
     @FXML
     public void resetBoard() {
+        setupError.setText("");
         startButton.setDisable(true);
         game.getBoard1().clear();
         nextShip.setText("Size of next ship: 4");
@@ -95,7 +96,7 @@ public class PrimaryController {
     public void randomizeShips() {
         resetBoard();
         game.getBoard1().randomizeShips();
-        nextShip.setText("Size of next ship: 0");
+        nextShip.setText("You placed all the ships");
         startButton.setDisable(false);
         updateBoard();
     }
@@ -165,8 +166,10 @@ public class PrimaryController {
         int playerTurn;
         int enemyTurn;
         try {
+            attackError.setText("");
             playerTurn = game.playerTurn(posx, posy);
         } catch (Exception e) {
+            attackError.setText(e.getMessage());
             return;
         }
         enemyTurn = game.aiTurn();
@@ -243,13 +246,16 @@ public class PrimaryController {
         int posx = Integer.parseInt(clicked.getId().substring(0, 1));
         int posy = Integer.parseInt(clicked.getId().substring(1, 2));
         try {
+            setupError.setText("");
             game.getBoard1().placeShip(posx, posy, directionChoice.getValue().IS_HORIZONTAL);
         } catch (Exception e) {
-            // TODO: handle exception
+            setupError.setText(e.getMessage());
         }
         nextShip.setText("Size of next ship: " + game.getBoard1().getShipLengths()[game.getBoard1().getPlacedShips()]);
-        if (game.getBoard1().getPlacedShips() == 9)
+        if (game.getBoard1().getPlacedShips() == 9) {
+            nextShip.setText("You placed all the ships");
             startButton.setDisable(false);
+        }
         updateBoard();
     }
 
