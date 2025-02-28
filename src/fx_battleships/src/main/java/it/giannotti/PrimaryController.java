@@ -1,6 +1,5 @@
 package it.giannotti;
 
-import java.io.IOException;
 import it.giannotti.battleships.BattleshipsGame;
 import it.giannotti.battleships.Coordinates;
 import it.giannotti.battleships.Node;
@@ -185,7 +184,7 @@ public class PrimaryController {
                 break;
             case 3:
                 endGame(true);
-                break;
+                return;
         }
         switch (enemyTurn) {
             case 0:
@@ -199,7 +198,7 @@ public class PrimaryController {
                 break;
             case 3:
                 endGame(false);
-                break;
+                return;
         }
     }
 
@@ -208,11 +207,17 @@ public class PrimaryController {
         endBox.setVisible(false);
         setupBox.setVisible(true);
         game.resetGame();
+        resetBoard();
         playerResult.setText("");
         enemyResult.setText("");
         game = BattleshipsGame.getInstance();
         updateBoard();
         updateEnemyBoard();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                playerBoard.lookup("#" + i + "" + j).setDisable(true);
+            }
+        }
     }
 
     public void endGame(boolean won) {
