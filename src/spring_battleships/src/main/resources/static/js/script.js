@@ -1,10 +1,15 @@
-$(document).ready(function() {
-    function createGrid(container) {
-        for (let i = 0; i < 100; i++) {
-   	        $(container).append('<div class="cell" data-index="' + i + '"></div>')
-        }
+function createGrid(container) {
+    const gridContainer = document.querySelector(container)
+    const size = 10
+        for (let i = 0; i < size * size; i++) {
+        const gridItem = document.createElement('div')
+        gridItem.setAttribute("data-index",i)
+        gridItem.classList.add('cell')
+        gridContainer.appendChild(gridItem)
     }
-    console.log("asd")
+}
+
+$(document).ready(function() {
     createGrid('#player1-grid')
     createGrid('#player2-grid')
 })
