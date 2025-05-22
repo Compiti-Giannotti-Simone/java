@@ -13,7 +13,7 @@ public class Board {
 
     private final Integer[] shipLengths = new Integer[] { 4, 3, 3, 3, 2, 2, 2, 1, 1, 0};
 
-    private List<Coordinates> attackedList = new ArrayList<>();
+    private List<Node> attackedList = new ArrayList<>();
     private List<Ship> ships = new ArrayList<>();
     private int placedShips = 0;
     private boolean hidden;
@@ -28,7 +28,7 @@ public class Board {
     }
 
     public void randomizeShips() {
-        ships.clear();
+        clear();
         Random r = new Random(System.currentTimeMillis());
         for (int i = 0; i < 9; i++) {
             boolean placed = false;
@@ -44,8 +44,8 @@ public class Board {
 
     /**
      * 
-     * @param posx       - starting position on x axis
-     * @param posy       - starting position on y axis
+     * @param posx       - starting position on x-axis
+     * @param posy       - starting position on y-axis
      * @param horizontal - boolean do decide whether to place the ship horizontally
      *                   or not
      * @throws AlreadyPlacedException
@@ -83,21 +83,24 @@ public class Board {
      * @throws AlreadyAttackedException if attacked position is already in attack
      *                                  list
      */
-    public int checkHit(Coordinates pos) throws AlreadyAttackedException {
-        for (Coordinates coordinates : attackedList) {
-            if (pos.equals(coordinates))
+    public int checkHit(Node pos) throws AlreadyAttackedException {
+        int result = 0;
+        for (Node n : attackedList) {
+            if(n.getPosition().equals(pos.getPosition())) {
                 throw new AlreadyAttackedException("The coordinates have already been attacked");
+            }
         }
-        attackedList.add(pos);
         for (Ship ship : ships) {
             for (Node n : ship.getNodes()) {
-                if (n.getPosition().equals(pos)) {
+                if (n.getPosition().equals(pos.getPosition())) {
                     n.setHit(true);
-                    return ship.checkSunk();
+                    pos.setHit(true);
+                    result = ship.checkSunk();
                 }
             }
         }
-        return 0;
+        attackedList.add(pos);
+        return result;
     }
 
     public boolean checkLoss() {
