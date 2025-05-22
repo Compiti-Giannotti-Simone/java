@@ -203,15 +203,19 @@ function updatePlayerGrid() {
             })
             document.querySelector('#player1-grid').querySelectorAll('.cell').forEach(element => {
                 element.innerHTML = ""
+                element.classList.remove('text-danger')
+                element.classList.remove('text-primary')
             })
             attacks.forEach(node => {
                 let index = node.position.posx + node.position.posy * 10
                 const cellHit = document.querySelector('#player1-grid').querySelector('[data-index="' + index + '"]')
                 if(node.hit) {
                     cellHit.innerHTML = "X"
+                    cellHit.classList.add('text-danger')
                 }
                 else {
                     cellHit.innerHTML = "~"
+                    cellHit.classList.add('text-primary')
                 }
             })
         },
@@ -225,15 +229,19 @@ function updateEnemyGrid() {
         success: function(data) {
             document.querySelector('#player2-grid').querySelectorAll('.cell').forEach(element => {
                 element.innerHTML = ""
+                element.classList.remove('text-danger')
+                element.classList.remove('text-primary')
             })
             data.forEach(node => {
                 let index = node.position.posx + node.position.posy * 10
                 const cellHit = document.querySelector('#player2-grid').querySelector('[data-index="' + index + '"]')
                 if(node.hit) {
                     cellHit.innerHTML = "X"
+                    cellHit.classList.add('text-danger')
                 }
                 else {
                     cellHit.innerHTML = "~"
+                    cellHit.classList.add('text-primary')
                 }
             })
         },
